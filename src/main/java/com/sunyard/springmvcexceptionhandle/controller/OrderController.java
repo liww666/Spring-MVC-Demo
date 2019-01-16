@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,7 +24,7 @@ public class OrderController {
     3.直接在方法中加入同名参数
      */
     @RequestMapping("/showorder")
-    public String showOrder(@RequestParam(name="id",required = false) String id, Model model){
+    public ModelAndView showOrder(@RequestParam(name="id",required = false) String id, Model model){
 //        String id=request.getParameter("id");
         if(id==null){
             throw new OrderNotFoundException();
@@ -38,6 +39,6 @@ public class OrderController {
             throw new DataAccessException();
         }
         model.addAttribute("result","order detail:"+id);
-        return "order detail:"+id;
+        return new ModelAndView("test");
     }
 }
